@@ -13,11 +13,8 @@ typedef struct
  * @param handle Pointer to an instance of `smoothing_filter_t`.
  * @param smoothing_factor A floating point number between 0 and 1 that determines how much smoothing to apply.
  *  Smaller values apply more smoothing.
- * @param initial_output The initial output of the filter. If the approximate DC value of the input is known,
- *  the initial value of the filter can be set equal to this value to reduce settling time at startup.
- *  Otherwise, this value can simply be set to 0.
  */
-void smoothing_filter_init(smoothing_filter_t *handle, float smoothing_factor, float initial_output);
+void smoothing_filter_init(smoothing_filter_t *handle, float smoothing_factor);
 
 /**
  * @brief Process the next input value.
