@@ -6,7 +6,7 @@ extern "C"
     #include "containers/queue.h"
 }
 
-#define BUFFER_LENGTH 4
+static constexpr unsigned BUFFER_LENGTH = 4;
 
 class QueueTest : public testing::Test
 {

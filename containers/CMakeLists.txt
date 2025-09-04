@@ -1,9 +1,13 @@
 set(CONTAINER_SOURCES
     queue.c
+    ringbuffer_i16.c
 )
-    
+
+set(TEST_DIRECTORY "../test")
+
 set(CONTAINER_TEST_SOURCES
-    ../test/queue_test.cpp
+    ${TEST_DIRECTORY}/queue_test.cpp
+    ${TEST_DIRECTORY}/ringbuffer_i16_test.cpp
 )
 
 if(TARGET kleinlibc)

@@ -1,6 +1,5 @@
+#include <string.h>
 #include "containers/queue.h"
-
-static void* copy(void* destination, const void* source, uint32_t num_bytes);
 
 void queue_create(queue_t* handle, void* buffer, uint32_t length, uint32_t element_size)
 {
@@ -26,7 +25,7 @@ bool queue_push(queue_t* handle, void* element)
         return false;
     }
 
-    copy(handle->buffer + (handle->tail * handle->element_size), element, handle->element_size);
+    memcpy(handle->buffer + (handle->tail * handle->element_size), element, handle->element_size);
     handle->tail = (handle->tail + 1) % handle->capacity;
     handle->size++;
     
@@ -41,7 +40,7 @@ bool queue_pop(queue_t* handle, void* destination)
         return false;
     }
     
-    copy(destination, handle->buffer + (handle->head * handle->element_size), handle->element_size);
+    memcpy(destination, handle->buffer + (handle->head * handle->element_size), handle->element_size);
     handle->head = (handle->head + 1) % handle->capacity;
     handle->size--;
     
@@ -65,19 +64,6 @@ bool queue_peek(queue_t* handle, void* destination)
         return false;
     }
 
-    copy(destination, handle->buffer + (handle->head * handle->element_size), handle->element_size);
+    memcpy(destination, handle->buffer + (handle->head * handle->element_size), handle->element_size);
     return true;
-}
-
-static void* copy(void* destination, const void* source, uint32_t num_bytes)
-{
-    uint8_t* current_destination = (uint8_t*)destination;
-    uint8_t* current_source = (uint8_t*)source;
-
-    while(num_bytes--)
-    {
-        *current_destination++ = *current_source++;
-    }
-
-    return destination;
 }
