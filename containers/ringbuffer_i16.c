@@ -28,7 +28,11 @@ void ringbuffer_i16_add(ringbuffer_i16_t* handle, int16_t element)
 {
     handle->buffer[handle->head] = element;
     handle->head = (handle->head + 1) % handle->capacity;
-    handle->size++;
+    
+    if (handle->size < handle->capacity)
+    {
+        handle->size++;
+    }
 }
 
 int16_t ringbuffer_i16_get(ringbuffer_i16_t* handle, uint32_t index)
