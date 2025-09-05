@@ -4,7 +4,7 @@
 
 extern "C"
 {
-    #include "dsp/fir_i16.h"
+    #include "dsp/fir_f32.h"
 }
 
 static constexpr unsigned NUM_TAPS = 10;
@@ -14,31 +14,31 @@ static constexpr unsigned NUM_SAMPLES = 100;
 // 5 Hz @ 100 Hz sample rate).
 static float lowpass[NUM_TAPS] = {0.011982297073578192, 0.032593697188218536, 0.08880972436230841, 0.1590336085502214, 0.20758067282567344, 0.20758067282567344, 0.15903360855022144, 0.08880972436230844, 0.032593697188218536, 0.011982297073578192};
 
-class FirI16Test : public testing::Test
+class FirF32Test : public testing::Test
 {
 protected:
-    fir_i16_t fir;
-    ringbuffer_i16_t ringbuffer;
-    int16_t coeff_buffer[NUM_TAPS];
-    int16_t sample_buffer[NUM_TAPS];
+    fir_f32_t fir;
+    ringbuffer_f32_t ringbuffer;
+    float coeff_buffer[NUM_TAPS];
+    float sample_buffer[NUM_TAPS];
 
     void SetUp() override
     {
-        ringbuffer_i16_create(&ringbuffer, sample_buffer, NUM_TAPS);
-        fir_i16_init(&fir, &ringbuffer, lowpass, coeff_buffer, NUM_TAPS);
+        ringbuffer_f32_create(&ringbuffer, sample_buffer, NUM_TAPS);
+        fir_f32_init(&fir, &ringbuffer, lowpass, NUM_TAPS);
     }
 };
 
-TEST_F(FirI16Test, ZeroInitialized)
+TEST_F(FirF32Test, ZeroInitialized)
 {
-    int16_t output = fir_i16_process(&fir, 0);
+    float output = fir_f32_process(&fir, 0);
     ASSERT_EQ(output, 0);
 }
 
-TEST_F(FirI16Test, ZeroInitializedNonZeroInput)
+TEST_F(FirF32Test, ZeroInitializedNonZeroInput)
 {
-    int16_t input = 1337;
-    int16_t output = fir_i16_process(&fir, input);
+    float input = 1337;
+    float output = fir_f32_process(&fir, input);
     
     // all other input samples are zero initialized.
     // process() function handles right-shifting the sum of products
@@ -46,12 +46,12 @@ TEST_F(FirI16Test, ZeroInitializedNonZeroInput)
     ASSERT_EQ(output, expected_output);
 }
 
-TEST_F(FirI16Test, SmoothsOutStepFunction)
+TEST_F(FirF32Test, SmoothsOutStepFunction)
 {
-    int16_t output, prev_output = 0;
+    float output, prev_output = 0;
     for (uint32_t i = 0; i < NUM_SAMPLES; i++)
     {
-        output = fir_i16_process(&fir, INT16_MAX);
+        output = fir_f32_process(&fir, INT16_MAX);
         ASSERT_TRUE(output >= prev_output);
         
         //std::cout << output << std::endl;
@@ -68,27 +68,27 @@ TEST_F(FirI16Test, SmoothsOutStepFunction)
     FAIL(); // Output should have converged by now
 }
 
-TEST_F(FirI16Test, MultipleSamples)
+TEST_F(FirF32Test, MultipleSamples)
 {
-    int16_t input = 1337;
-    int16_t single_outputs[NUM_SAMPLES];
+    float input = 1337;
+    float single_outputs[NUM_SAMPLES];
 
     for (uint32_t i = 0; i < NUM_SAMPLES; i++)
     {
-        single_outputs[i] = fir_i16_process(&fir, input);
+        single_outputs[i] = fir_f32_process(&fir, input);
     }
 
-    fir_i16_reset(&fir);
+    fir_f32_reset(&fir);
 
-    int16_t output_block[NUM_SAMPLES];
-    int16_t input_block[NUM_SAMPLES];
+    float output_block[NUM_SAMPLES];
+    float input_block[NUM_SAMPLES];
 
     for (uint32_t i = 0; i < NUM_SAMPLES; i++)
     {
         input_block[i] = input;
     }
 
-    fir_i16_process_block(&fir, input_block, output_block, NUM_SAMPLES);
+    fir_f32_process_block(&fir, input_block, output_block, NUM_SAMPLES);
 
     for (uint32_t i = 0; i < NUM_SAMPLES; i++)
     {
