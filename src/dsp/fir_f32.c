@@ -1,6 +1,4 @@
-#include "dsp/fir_f32.h"
-
-static const uint8_t NUM_SHIFTS = 15;
+#include "kleinlibc/dsp/fir_f32.h"
 
 void fir_f32_init(fir_f32_t* handle, ringbuffer_f32_t* sample_buffer, const float* coeffs, uint16_t num_taps)
 {

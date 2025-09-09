@@ -1,7 +1,7 @@
 #ifndef KLEINLIB_FIR_I16_H
 #define KLEINLIB_FIR_I16_H
 
-#include "containers/ringbuffer_i16.h"
+#include "kleinlibc/containers/ringbuffer_i16.h"
 
 typedef struct fir_i16_struct fir_i16_t;
 

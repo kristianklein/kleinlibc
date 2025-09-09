@@ -1,4 +1,4 @@
-#include "dsp/fir_i16.h"
+#include "kleinlibc/dsp/fir_i16.h"
 
 static const uint8_t NUM_SHIFTS = 15;
 
@@ -26,7 +26,7 @@ int16_t fir_i16_process(fir_i16_t* handle, int16_t input)
     int64_t y = 0;
     for (uint16_t i = 0; i < handle->taps; i++)
     {
-        y += handle->coeff_buffer[i] * ringbuffer_i16_get(handle->sample_buffer, i);
+        y += (int32_t)handle->coeff_buffer[i] * ringbuffer_i16_get(handle->sample_buffer, i);
     }
 
     return y >> NUM_SHIFTS;

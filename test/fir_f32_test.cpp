@@ -4,7 +4,7 @@
 
 extern "C"
 {
-    #include "dsp/fir_f32.h"
+    #include "kleinlibc/dsp/fir_f32.h"
 }
 
 static constexpr unsigned NUM_TAPS = 10;

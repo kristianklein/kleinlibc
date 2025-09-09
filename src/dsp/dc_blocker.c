@@ -1,4 +1,4 @@
-#include "dsp/dc_blocker.h"
+#include "kleinlibc/dsp/dc_blocker.h"
 
 void dc_blocker_init(dc_blocker_t *handle, float blocking_factor)
 {

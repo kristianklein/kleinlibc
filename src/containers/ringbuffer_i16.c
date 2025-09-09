@@ -9,7 +9,7 @@ the following functions:
 - is_full (to let the user know that enough samples have been pushed, to avoid start-up issues)
 */
 
-#include "containers/ringbuffer_i16.h"
+#include "kleinlibc/containers/ringbuffer_i16.h"
 
 void ringbuffer_i16_create(ringbuffer_i16_t* handle, int16_t* buffer, uint32_t length)
 {

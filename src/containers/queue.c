@@ -1,12 +1,12 @@
 #include <string.h>
-#include "containers/queue.h"
+#include "kleinlibc/containers/queue.h"
 
 void queue_create(queue_t* handle, void* buffer, uint32_t length, uint32_t element_size)
 {
     handle->buffer = buffer;
     handle->capacity = length;
     handle->element_size = element_size;
-    handle->size = 0;
+    atomic_init(&handle->size, 0);
     handle->head = 0;
     handle->tail = 0;
 }
@@ -27,7 +27,7 @@ bool queue_push(queue_t* handle, void* element)
 
     memcpy(handle->buffer + (handle->tail * handle->element_size), element, handle->element_size);
     handle->tail = (handle->tail + 1) % handle->capacity;
-    handle->size++;
+    atomic_fetch_add(&handle->size, 1);
     
     return true;
 }
@@ -42,7 +42,7 @@ bool queue_pop(queue_t* handle, void* destination)
     
     memcpy(destination, handle->buffer + (handle->head * handle->element_size), handle->element_size);
     handle->head = (handle->head + 1) % handle->capacity;
-    handle->size--;
+    atomic_fetch_sub(&handle->size, 1);
     
     return true;
 }
