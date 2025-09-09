@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <stdatomic.h>
 
 typedef struct queue_struct queue_t;
 
@@ -20,7 +19,7 @@ struct queue_struct
     void *buffer;
     uint32_t capacity;
     uint32_t element_size;
-    _Atomic uint32_t size;
+    uint32_t size;
     uint32_t head;
     uint32_t tail;
 };

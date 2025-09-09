@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdatomic.h>
 #include "kleinlibc/containers/queue.h"
 
 void queue_create(queue_t* handle, void* buffer, uint32_t length, uint32_t element_size)

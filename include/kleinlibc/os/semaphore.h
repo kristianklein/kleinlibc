@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <stdatomic.h>
 
 typedef struct semaphore_struct semaphore_t;
 
@@ -13,7 +12,7 @@ void semaphore_give(semaphore_t* sem);
 
 struct semaphore_struct
 {
-    _Atomic uint32_t value;
+    uint32_t value;
     uint32_t max;
 };
 
