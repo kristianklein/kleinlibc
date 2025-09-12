@@ -12,7 +12,7 @@ void semaphore_give(semaphore_t* sem);
 
 struct semaphore_struct
 {
-    uint32_t value;
+    volatile uint32_t value;
     uint32_t max;
 };
 
