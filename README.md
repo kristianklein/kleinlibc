@@ -1,5 +1,5 @@
 # kleinlibc
-**kleinlibc** is collection of modules for embedded systems written in C.
+**kleinlibc** is a collection of modules for embedded systems written in C.
 
 ## Design philosophy
 The library is designed specifically with resource-constrained embedded
