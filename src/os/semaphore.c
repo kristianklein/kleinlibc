@@ -1,3 +1,4 @@
+#include <stdatomic.h>
 #include "kleinlibc/os/semaphore.h"
 
 void semaphore_init(semaphore_t* sem, uint32_t initial_value, uint32_t max_value)

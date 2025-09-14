@@ -43,7 +43,7 @@ void rtc_scheduler_run()
 
     while(1)
     {
-        for (uint32_t i = 0; i < max_tasks; i++)
+        for (uint32_t i = 0; i < task_count; i++)
         {
             rtc_task_t* task = tasks[i];
 
@@ -52,7 +52,7 @@ void rtc_scheduler_run()
             	task->next_run_ms += task->period_ms;
             	task->run();
             }
-            else if (semaphore_take(task->signal))
+            else if (task->signal && semaphore_take(task->signal))
             {
             	// do not update next_run_ms, period should be phase-locked
             	task->run();
