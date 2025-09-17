@@ -22,7 +22,7 @@ header in the module, the module should take a generic function pointer
 functionality. This allows for hardware-related functions to be easily 
 mocked for off-target testing.
 
-## Using the library
+## Building the library
 The easiest way to include the library in your project is simply to 
 clone the repository into your project tree, add the `include` 
 directory to your include path and build everything in the `src`
@@ -44,7 +44,7 @@ $ cmake --build .
 instructions.*
 
 To build the library and unit tests for your development machine, set 
-the `BUILD_UNIT_TESTS` variable when invoking CMake:
+the `BUILD_UNIT_TESTS` variable during CMake configuration:
 
 ```
 $ mkdir build_test && cd build_test
@@ -52,7 +52,7 @@ $ cmake .. -DBUILD_UNIT_TESTS=ON
 $ cmake --build .
 ```
 
-Now you can run the unit test suite with:
+You can now run the unit test suite with:
 ```
 $ ./kleinlibc_test
 ```
@@ -60,7 +60,7 @@ $ ./kleinlibc_test
 ### Building and installing GoogleTest
 
 To install GoogleTest system-wide, simply clone the Github repository
-and build/install using CMake and make:
+and build/install using CMake:
 
 ```
 $ git clone https://github.com/google/googletest
@@ -68,6 +68,28 @@ $ cd googletest
 $ mkdir build && cd build
 $ cmake ..
 $ cmake --build .
-$ make
-$ sudo make install
+$ cmake --build . --target install
 ```
+
+## Documentation
+The documentation is located in the `docs` directory. The code itself is documented
+using Doxygen comments, while the final documentation is built with Sphinx. Make
+sure Doxygen and Python3 is installed on your machine before trying to build the docs.
+
+Enabling the CMake option `BUILD_DOCS` during configuration will create a Python virtual
+environment in the build directory and install the required packages.
+
+```
+$ mkdir build_docs && cd build_docs
+$ cmake .. -DBUILD_DOCS=ON
+```
+
+*Note: It may be necessary to help CMake find your Doxygen installation, e.g. with `-DCMAKE_PREFIX_PATH=/usr/local`*
+
+Now build the documentation with:
+
+```
+$ cmake --build . --target docs
+```
+
+Open `build_docs/docs/build/html/index.html` to view the documentation.
