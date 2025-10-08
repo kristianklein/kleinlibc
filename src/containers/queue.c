@@ -1,8 +1,9 @@
 #include <string.h>
 #include <stdatomic.h>
 #include "kleinlibc/containers/queue.h"
+#include "kleinlibc/utils/sim_printf.h"
 
-void queue_create(queue_t* handle, void* buffer, uint32_t length, uint32_t element_size)
+void queue_create(queue_t* handle, void* buffer, size_t length, size_t element_size)
 {
     handle->buffer = buffer;
     handle->capacity = length;
@@ -12,14 +13,7 @@ void queue_create(queue_t* handle, void* buffer, uint32_t length, uint32_t eleme
     handle->tail = 0;
 }
 
-
-bool queue_is_empty(queue_t* handle)
-{
-    return 0 == handle->size;
-}
-
-
-bool queue_push(queue_t* handle, void* element)
+bool queue_push(queue_t* handle, const void* element)
 {    
     if (queue_is_full(handle))
     {
@@ -46,16 +40,6 @@ bool queue_pop(queue_t* handle, void* destination)
     atomic_fetch_sub(&handle->size, 1);
     
     return true;
-}
-
-bool queue_is_full(queue_t* handle)
-{
-    return handle->capacity == handle->size;
-}
-
-uint32_t queue_size(queue_t* handle)
-{
-    return handle->size;
 }
 
 bool queue_peek(queue_t* handle, void* destination)

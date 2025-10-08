@@ -35,9 +35,9 @@ void fir_f32_reset(fir_f32_t* handle)
     }
 }
 
-void fir_f32_process_block(fir_f32_t* handle, const float* input_block, float* output_block, uint32_t num_samples)
+void fir_f32_process_block(fir_f32_t* handle, const float * const input_block, float * const output_block, size_t num_samples)
 {
-    for (uint32_t i = 0; i < num_samples; i++)
+    for (size_t i = 0; i < num_samples; i++)
     {
         output_block[i] = fir_f32_process(handle, input_block[i]);
     }

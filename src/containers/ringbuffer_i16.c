@@ -11,17 +11,12 @@ the following functions:
 
 #include "kleinlibc/containers/ringbuffer_i16.h"
 
-void ringbuffer_i16_create(ringbuffer_i16_t* handle, int16_t* buffer, uint32_t length)
+void ringbuffer_i16_create(ringbuffer_i16_t* handle, int16_t* buffer, size_t length)
 {
     handle->buffer = buffer;
     handle->capacity = length;
     handle->size = 0;
     handle->head = 0;
-}
-
-bool ringbuffer_i16_is_full(ringbuffer_i16_t* handle)
-{
-    return handle->size == handle->capacity;
 }
 
 void ringbuffer_i16_add(ringbuffer_i16_t* handle, int16_t element)
@@ -35,14 +30,14 @@ void ringbuffer_i16_add(ringbuffer_i16_t* handle, int16_t element)
     }
 }
 
-int16_t ringbuffer_i16_get(ringbuffer_i16_t* handle, uint32_t index)
+int16_t ringbuffer_i16_get(ringbuffer_i16_t* handle, size_t index)
 {
     if (index >= handle->capacity)
     {
         return INT16_MIN;
     }
 
-    uint32_t local_index;
+    size_t local_index;
 
     if (index + 1 > handle->head) // handle wrap around
     {

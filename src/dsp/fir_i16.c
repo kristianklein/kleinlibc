@@ -2,7 +2,7 @@
 
 static const uint8_t NUM_SHIFTS = 15;
 
-void fir_i16_init(fir_i16_t* handle, ringbuffer_i16_t* sample_buffer, const float* coeffs, int16_t* coeff_buffer, uint16_t num_taps)
+void fir_i16_init(fir_i16_t* handle, ringbuffer_i16_t *sample_buffer, const float *coeffs, int16_t *coeff_buffer, uint16_t num_taps)
 {
     handle->sample_buffer = sample_buffer;
     handle->coeff_buffer = coeff_buffer;
@@ -41,9 +41,9 @@ void fir_i16_reset(fir_i16_t* handle)
     }
 }
 
-void fir_i16_process_block(fir_i16_t* handle, const int16_t* input_block, int16_t* output_block, uint32_t num_samples)
+void fir_i16_process_block(fir_i16_t* handle, const int16_t * const input_block, int16_t * const output_block, size_t num_samples)
 {
-    for (uint32_t i = 0; i < num_samples; i++)
+    for (size_t i = 0; i < num_samples; i++)
     {
         output_block[i] = fir_i16_process(handle, input_block[i]);
     }
