@@ -6,7 +6,7 @@ static size_t task_count;
 static bool tasks_initialized;
 static get_tick_ms_func get_tick;
 
-void rtc_scheduler_init(rtc_task_t* task_buffer[], size_t length, get_tick_ms_func get_tick_ms)
+void rtc_scheduler_init(rtc_task_t* task_buffer[], size_t length, uint32_t (*get_tick_ms)())
 {
     tasks = task_buffer;
     max_tasks = length;
@@ -49,10 +49,10 @@ void rtc_scheduler_run()
 
             if (task->period_ms != 0 && task->next_run_ms <= get_tick())
             {
-            	task->next_run_ms += task->period_ms;
-            	task->run();
+                task->next_run_ms += task->period_ms;
+                task->run(task->args);
             }
-            else if (task->signal && semaphore_take(task->signal))
+            else if (task->signal && semaphore_take(task->signal)) // TODO: What if semaphore is NULL?
             {
             	// do not update next_run_ms, period should be phase-locked
             	task->run();
