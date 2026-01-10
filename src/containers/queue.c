@@ -1,7 +1,6 @@
 #include <string.h>
 #include <stdatomic.h>
 #include "kleinlibc/containers/queue.h"
-#include "kleinlibc/utils/sim_printf.h"
 
 void queue_create(queue_t* handle, void* buffer, size_t length, size_t element_size)
 {
