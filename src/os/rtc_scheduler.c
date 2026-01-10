@@ -1,12 +1,12 @@
 #include "kleinlibc/os/rtc_scheduler.h"
 
-static rtc_task_t** tasks;
+static rtc_task_t* tasks;
 static size_t max_tasks;
 static size_t task_count;
 static bool tasks_initialized;
 static get_tick_ms_func get_tick;
 
-void rtc_scheduler_init(rtc_task_t* task_buffer[], size_t length, uint32_t (*get_tick_ms)())
+void rtc_scheduler_init(rtc_task_t task_buffer[], size_t length, uint32_t (*get_tick_ms)())
 {
     tasks = task_buffer;
     max_tasks = length;
@@ -15,9 +15,11 @@ void rtc_scheduler_init(rtc_task_t* task_buffer[], size_t length, uint32_t (*get
     get_tick = get_tick_ms;
 }
 
-bool rtc_scheduler_add_task(rtc_task_t* task, rtc_task_init_func init_func, rtc_task_run_func run_func, void* args, uint32_t period_ms, semaphore_t* event_signal)
+bool rtc_scheduler_add_task(rtc_task_init_func init_func, rtc_task_run_func run_func, void* args, uint32_t period_ms, semaphore_t* event_signal)
 {
     if (task_count >= max_tasks) return false;
+
+    rtc_task_t *task = &tasks[task_count++];
 
     task->init = init_func;
     task->run = run_func;
@@ -25,7 +27,6 @@ bool rtc_scheduler_add_task(rtc_task_t* task, rtc_task_init_func init_func, rtc_
     task->period_ms = period_ms;
     task->next_run_ms = 0;
     task->signal = event_signal;
-    tasks[task_count++] = task;
     
     return true;
 }
@@ -36,7 +37,7 @@ void rtc_scheduler_run()
     // Initialize tasks
     for (size_t i = 0; i < task_count; i++)
     {
-        rtc_task_t* task = tasks[i];
+        rtc_task_t* task = &tasks[i];
         task->init(task->args);
         task->next_run_ms = start_time; // all tasks start simultaneously
     }
@@ -45,7 +46,7 @@ void rtc_scheduler_run()
     {
         for (size_t i = 0; i < task_count; i++)
         {
-            rtc_task_t* task = tasks[i];
+            rtc_task_t* task = &tasks[i];
 
             if (task->period_ms != 0 && task->next_run_ms <= get_tick())
             {
