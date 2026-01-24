@@ -1,4 +1,4 @@
-#include "kleinlibc/os/rtc_scheduler.h"
+#include "kleinlibc/rtc_scheduler.h"
 
 static rtc_task_t* tasks;
 static size_t max_tasks;

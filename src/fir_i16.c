@@ -1,4 +1,4 @@
-#include "kleinlibc/dsp/fir_i16.h"
+#include "kleinlibc/fir_i16.h"
 
 static const uint8_t NUM_SHIFTS = 15;
 

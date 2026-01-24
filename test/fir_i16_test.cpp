@@ -4,7 +4,7 @@
 
 extern "C"
 {
-    #include "kleinlibc/dsp/fir_i16.h"
+    #include "kleinlibc/fir_i16.h"
 }
 
 static constexpr unsigned NUM_TAPS = 10;

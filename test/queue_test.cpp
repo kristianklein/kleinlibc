@@ -3,7 +3,7 @@
 
 extern "C"
 {
-    #include "kleinlibc/containers/queue.h"
+    #include "kleinlibc/queue.h"
 }
 
 static constexpr unsigned BUFFER_LENGTH = 4;

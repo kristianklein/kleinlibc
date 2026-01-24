@@ -1,7 +1,7 @@
 #ifndef KLEINLIB_FIR_I16_H
 #define KLEINLIB_FIR_I16_H
 
-#include "kleinlibc/containers/ringbuffer_i16.h"
+#include "kleinlibc/ringbuffer_i16.h"
 
 typedef struct {
     ringbuffer_i16_t *sample_buffer;

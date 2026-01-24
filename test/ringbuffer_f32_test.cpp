@@ -2,7 +2,7 @@
 
 extern "C"
 {
-    #include "kleinlibc/containers/ringbuffer_f32.h"
+    #include "kleinlibc/ringbuffer_f32.h"
 }
 
 

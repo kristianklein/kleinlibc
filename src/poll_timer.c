@@ -1,4 +1,4 @@
-#include "kleinlibc/os/poll_timer.h"
+#include "kleinlibc/poll_timer.h"
 
 void poll_timer_init(poll_timer_t *handle, uint32_t (*get_milliseconds)(), poll_timer_mode mode, uint32_t timeout)
 {

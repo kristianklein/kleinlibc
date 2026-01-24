@@ -1,4 +1,4 @@
-#include "kleinlibc/dsp/smoothing_filter.h"
+#include "kleinlibc/smoothing_filter.h"
 
 void smoothing_filter_init(smoothing_filter_t *handle, float smoothing_factor)
 {

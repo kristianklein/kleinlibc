@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
-#include "kleinlibc/os/rtc_task.h"
+#include "kleinlibc/rtc_task.h"
 
 typedef uint32_t (*get_tick_ms_func)();
 

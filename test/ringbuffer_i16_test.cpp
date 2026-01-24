@@ -2,7 +2,7 @@
 
 extern "C"
 {
-    #include "kleinlibc/containers/ringbuffer_i16.h"
+    #include "kleinlibc/ringbuffer_i16.h"
 }
 
 

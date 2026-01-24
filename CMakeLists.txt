@@ -16,9 +16,7 @@ if(BUILD_UNIT_TESTS)
     target_link_libraries(kleinlibc_test gtest gtest_main kleinlibc)
 endif()
 
-add_subdirectory(src/containers)
-add_subdirectory(src/dsp)
-add_subdirectory(src/os)
+add_subdirectory(src)
 
 target_include_directories(kleinlibc PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include

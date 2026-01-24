@@ -1,7 +1,7 @@
 #ifndef KLEINLIB_FIR_F32_H
 #define KLEINLIB_FIR_F32_H
 
-#include "kleinlibc/containers/ringbuffer_f32.h"
+#include "kleinlibc/ringbuffer_f32.h"
 
 typedef struct {
     ringbuffer_f32_t* sample_buffer;

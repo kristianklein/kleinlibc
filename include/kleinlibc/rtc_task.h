@@ -2,7 +2,7 @@
 #define KLEINLIBC_RTC_TASK_H
 
 #include <stdint.h>
-#include "kleinlibc/os/semaphore.h"
+#include "kleinlibc/semaphore.h"
 
 typedef void (*rtc_task_init_func)(void*);
 typedef void (*rtc_task_run_func)();

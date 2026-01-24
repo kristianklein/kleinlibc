@@ -3,7 +3,7 @@
 
 extern "C"
 {
-    #include "kleinlibc/os/poll_timer.h"
+    #include "kleinlibc/poll_timer.h"
 }
 
 uint32_t tick_ms = 0;
