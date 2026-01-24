@@ -9,6 +9,7 @@ set(KLEINLIBC_SOURCES
     rtc_scheduler.c
     semaphore.c
     smoothing_filter.c
+    arena.c
 )
 
 target_sources(kleinlibc PRIVATE ${KLEINLIBC_SOURCES})
