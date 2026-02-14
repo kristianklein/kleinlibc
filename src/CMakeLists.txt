@@ -10,6 +10,7 @@ set(KLEINLIBC_SOURCES
     semaphore.c
     smoothing_filter.c
     arena.c
+    framing.c
 )
 
 target_sources(kleinlibc PRIVATE ${KLEINLIBC_SOURCES})

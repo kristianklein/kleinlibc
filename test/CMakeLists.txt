@@ -6,6 +6,7 @@ set(TEST_SOURCES
     fir_f32_test.cpp
     poll_timer_test.cpp
     arena_test.cpp
+    framing_test.cpp
 )
 
 target_sources(kleinlibc_test PRIVATE ${TEST_SOURCES})
